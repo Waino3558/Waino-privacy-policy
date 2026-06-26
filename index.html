@@ -1,86 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy - Waino</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      background-color: #000; 
-      color: #fff; 
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      background: #111; 
-      color: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(255,255,255,0.1);
-    }
-    h1 {
-      color: #fff;
-      text-align: center;
-    }
-    h2 {
-      color: #ddd;
-      margin-top: 25px;
-    }
-    p, li {
-      color: #ccc;
-    }
-    ul {
-      margin: 10px 0 20px 20px;
-    }
-    a {
-      color: #4da3ff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Waino</title>
+    
+    <!-- Import Fonts to match the app (Poppins for EN, Tajawal for AR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Dark Mode Defaults (Matched from React Native code) */
+            --bg-color: #090B0F;
+            --card-bg: #11151C;
+            --text-color: #F5F7FA;
+            --sub-text: #B8C0CC;
+            --divider: rgba(255, 255, 255, 0.06);
+            --primary: #3b82f6;
+        }
+
+        body.light-mode {
+            /* Light Mode Overrides */
+            --bg-color: #F4F6FA;
+            --card-bg: #FFFFFF;
+            --text-color: #101828;
+            --sub-text: #667085;
+            --divider: rgba(16, 24, 40, 0.06);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Top Controls Bar */
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--divider);
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-color);
+            padding-top: 20px;
+            z-index: 100;
+        }
+
+        button {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--divider);
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            filter: brightness(1.2);
+            transform: translateY(-1px);
+        }
+
+        /* Typography & Layout */
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+        }
+
+        .subtitle {
+            color: var(--sub-text);
+            font-size: 13px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: var(--sub-text);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 18px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 14px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.3s ease;
+        }
+
+        p, li {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        p:last-child, ul:last-child {
+            margin-bottom: 0;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .note {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--divider);
+            color: var(--sub-text);
+        }
+
+        /* RTL Specific Styling for Arabic */
+        #ar-content {
+            display: none; /* Hidden by default */
+            direction: rtl;
+            font-family: 'Tajawal', sans-serif;
+            text-align: right;
+        }
+
+        #ar-content ul {
+            padding-left: 0;
+            padding-right: 20px;
+        }
+
+        #ar-content .section-title {
+            letter-spacing: 0; /* Removing letter spacing for Arabic text */
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Privacy Policy for Waino</h1>
-    <p><strong>Effective date:</strong> October 8, 2025</p>
-    <p><strong>Contact email:</strong> <a href="mailto:waino3558@gmail.com">waino3558@gmail.com</a></p>
 
-    <h2>1. Information We Collect</h2>
-    <p>We may collect information you provide directly, such as:</p>
-    <ul>
-      <li>Email address</li>
-      <li>Username</li>
-      <li>University, major, and gender</li>
-    </ul>
+    <div class="container">
+        <!-- Controls -->
+        <div class="controls">
+            <button id="langToggle">🇸🇦 العربية</button>
+            <button id="themeToggle">☀️ Light Mode</button>
+        </div>
 
-    <h2>2. How We Use Your Information</h2>
-    <p>We use your information to:</p>
-    <ul>
-      <li>Create and manage your account</li>
-      <li>Provide and improve the app</li>
-      <li>Communicate with you if needed</li>
-    </ul>
+        <!-- ENGLISH CONTENT -->
+        <div id="en-content">
+            <h1 class="header-title">Privacy Policy</h1>
+            <div class="subtitle">Last updated: March 25, 2026</div>
 
-    <h2>3. Sharing Your Information</h2>
-    <p>We do not sell or share your personal information with third parties for marketing purposes.</p>
+            <div class="section-title">Overview</div>
+            <div class="card">
+                <p>This Privacy Policy explains how Waino handles information when you use the app, create an account, reserve tickets, or manage events as an organizer. This draft is based on the app's current visible behavior and backend structure in the codebase.</p>
+            </div>
 
-    <h2>4. Security</h2>
-    <p>We take reasonable steps to protect your information, but no system is completely secure.</p>
+            <div class="section-title">Information We Collect</div>
+            <div class="card">
+                <ul>
+                    <li>Account information such as your email address and password. Password handling is managed through Firebase Authentication.</li>
+                    <li>Profile information such as your name, date of birth, gender, university, college, and major.</li>
+                    <li>Organizer information such as phone number, display name, social links, and organizer access status.</li>
+                    <li>Event submission data from organizers, including event names, descriptions, locations, map links, category, dates, times, capacity, pricing, event images, and approval images where required.</li>
+                    <li>Ticket and reservation data such as user ID, event ID, reservation status, and cancellation or completion history.</li>
+                    <li>Usage data inside the app such as event views, link clicks, and aggregated organizer statistics.</li>
+                    <li>Notification and reminder data, including notification preferences, certain notification records, and event reminder schedules stored on your device.</li>
+                    <li>Locally stored device data such as language and theme preferences, cached app data, session state, and certain notification-related cache entries.</li>
+                </ul>
+            </div>
 
-    <h2>5. Your Choices</h2>
-    <p>You can update or delete your account information by contacting us at <a href="mailto:waino3558@gmail.com">waino3558@gmail.com</a>.</p>
+            <div class="section-title">How We Use Information</div>
+            <div class="card">
+                <ul>
+                    <li>To create and manage accounts, sign users in, and verify user status.</li>
+                    <li>To show, update, and delete profile information when requested by the user.</li>
+                    <li>To display, rank, and personalize events based on university, college, city, and in-app usage context.</li>
+                    <li>To manage tickets and reservations and connect those records to the correct events.</li>
+                    <li>To allow approved organizers to submit events and review related analytics.</li>
+                    <li>To send or schedule event-related notifications and reminders when a user enables them.</li>
+                    <li>To operate security, permissions, organizer-access updates, and backend workflows through Firebase and Cloud Functions.</li>
+                    <li>To comply with legal obligations, protect the app, and prevent abuse, fraud, or misuse.</li>
+                </ul>
+            </div>
 
-    <h2>6. Changes to This Privacy Policy</h2>
-    <p>We may update this policy occasionally. If we do, the new version will be available in the app with an updated effective date.</p>
+            <div class="section-title">When Information Is Public or Shared</div>
+            <div class="card">
+                <p>Waino does not sell personal information. Some data is public inside the app by design, and some data is processed by technical service providers so the app can function.</p>
+                <ul>
+                    <li>Approved event details may be visible to app users, including event name, images, description, location, timing, and related organizer-facing details.</li>
+                    <li>Organizer display names and organizer social links stored in public organizer records may be visible to users inside the app.</li>
+                    <li>We use Firebase and related Google services for authentication, database hosting, cloud storage, and backend functions.</li>
+                    <li>We use Expo Notifications to support notification features on supported devices.</li>
+                    <li>We may disclose information if required by law, to protect users, to enforce our Terms, or to investigate abuse.</li>
+                    <li>Platform administrators or reviewers may access pending event submissions, approval images, and access-control records for operational and moderation purposes.</li>
+                </ul>
+            </div>
 
-    <h2>7. Contact Us</h2>
-    <p>For any questions about this privacy policy, contact us at <a href="mailto:waino3558@gmail.com">waino3558@gmail.com</a>.</p>
-  </div>
+            <div class="section-title">Notifications and On-Device Data</div>
+            <div class="card">
+                <p>If you grant notification permission, the app may request notification access and store notification-related data on your device to support reminders and notification behavior.</p>
+                <p>In the current app structure, event reminders chosen by a user are scheduled locally on that user's device. The app also keeps certain local data such as temporary tokens, session state, and cached content to improve performance.</p>
+                <div class="note"><strong>Note:</strong> If you do not want notifications, you can deny the system permission or turn notifications off in your device settings. If you do not want a reminder for a specific event, you can turn it off from the Tickets screen.</div>
+            </div>
+
+            <div class="section-title">Data Retention and Deletion</div>
+            <div class="card">
+                <p>We keep data for as long as reasonably necessary to operate the app, provide event and ticket functionality, and meet legitimate legal or operational requirements.</p>
+                <p>Some data may remain for a period after it is removed from the interface if it exists in backups, security logs, or operational records reasonably required for the service.</p>
+                <p>Users can request account deletion from inside the app. When an account is deleted, we attempt to remove the associated user record from the database, but some event-related records, aggregated data, and security or legally required records may remain where retention is necessary.</p>
+            </div>
+
+            <div class="section-title">Security</div>
+            <div class="card">
+                <p>We take reasonable steps to protect data using the tools provided by our technical vendors, access controls, and services such as Firebase Authentication, Firestore, Cloud Functions, and Storage. No electronic storage or transmission method is completely secure.</p>
+            </div>
+
+            <div class="section-title">Children and Eligibility</div>
+            <div class="card">
+                <p>Waino is primarily intended for university-age users and other users who are legally able to use digital services under applicable law. If you are not legally able to consent to these practices in your jurisdiction, you should only use the app with any guardian or parental involvement required by law.</p>
+            </div>
+
+            <div class="section-title">International Processing</div>
+            <div class="card">
+                <p>Data may be processed or stored by service providers that operate in more than one country. By using the app, you understand that your information may be processed outside your home country, subject to the safeguards and contractual terms used by those providers.</p>
+            </div>
+
+            <div class="section-title">Your Choices</div>
+            <div class="card">
+                <ul>
+                    <li>You can update parts of your profile from the in-app profile screen.</li>
+                    <li>You can request account deletion from inside the app.</li>
+                    <li>You can control notifications from your device settings and reminder settings in the app.</li>
+                    <li>You can stop using the app at any time, although certain records may remain as described above where retention is necessary.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">Changes to This Policy and Contact</div>
+            <div class="card">
+                <p>We may update this Privacy Policy from time to time if the app, its data practices, or legal requirements change. The updated version becomes effective when it is posted in or linked from the app.</p>
+                <p>If you have privacy questions or requests, use the Help & Support section inside the app as the current contact mechanism for Waino.</p>
+                <div class="note"><strong>Note:</strong> If you later add a public support email or a legal business entity name, insert it here before final publication.</div>
+            </div>
+        </div>
+
+        <!-- ARABIC CONTENT -->
+        <div id="ar-content">
+            <h1 class="header-title">سياسة الخصوصية</h1>
+            <div class="subtitle">آخر تحديث: 25 مارس 2026</div>
+
+            <div class="section-title">مقدمة</div>
+            <div class="card">
+                <p>توضح سياسة الخصوصية هذه كيف يتعامل تطبيق Waino مع المعلومات عند استخدامك للتطبيق، أو إنشاء حساب، أو حجز تذاكر، أو إدارة فعاليات بصفتك منظمًا. لقد تمت صياغة هذه السياسة استنادًا إلى سلوك التطبيق الحالي والبنية الخلفية الظاهرة في الكود.</p>
+            </div>
+
+            <div class="section-title">المعلومات التي نجمعها</div>
+            <div class="card">
+                <ul>
+                    <li>معلومات الحساب مثل البريد الإلكتروني وكلمة المرور. تتم إدارة كلمة المرور عبر Firebase Authentication.</li>
+                    <li>معلومات الملف الشخصي مثل الاسم، وتاريخ الميلاد، والجنس، والجامعة، والكلية، والتخصص.</li>
+                    <li>بيانات المنظمين مثل رقم الهاتف، والاسم الظاهر، وروابط التواصل الاجتماعي، وحالة صلاحية المنظم.</li>
+                    <li>بيانات الفعاليات التي يرسلها المنظمون مثل اسم الفعالية، والوصف، والموقع، ورابط الخريطة، والتصنيف، والتواريخ، والأوقات، والسعة، والسعر، وصور الفعالية، وصور الموافقة عند الحاجة.</li>
+                    <li>بيانات التذاكر والحجوزات مثل معرف المستخدم، ومعرف الفعالية، وحالة الحجز، وسجل الإلغاء أو الإكمال.</li>
+                    <li>بيانات الاستخدام داخل التطبيق مثل مشاهدات الفعاليات، ونقرات الروابط، والإحصاءات المجمعة للمنظمين.</li>
+                    <li>بيانات الإشعارات والتذكيرات، بما في ذلك تفضيلات الإشعارات، وسجل إشعارات معين، وتذكيرات الفعاليات المحلية المخزنة على جهازك.</li>
+                    <li>بيانات مخزنة محليًا على الجهاز مثل تفضيلات اللغة والثيم، ونسخ مخبأة لبعض البيانات، وحالة الجلسة، وبعض بيانات الإشعارات.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">كيف نستخدم المعلومات</div>
+            <div class="card">
+                <ul>
+                    <li>إنشاء الحسابات وإدارتها وتسجيل الدخول والتحقق من حالة المستخدم.</li>
+                    <li>عرض الملف الشخصي وتحديثه وحذف الحساب عند طلب المستخدم.</li>
+                    <li>عرض الفعاليات وترتيبها وتخصيصها بناءً على الجامعة أو الكلية أو المدينة أو اهتمامات الاستخدام داخل التطبيق.</li>
+                    <li>إدارة التذاكر والحجوزات، وإظهار التذاكر الحالية أو المكتملة، وربطها بالفعاليات المناسبة.</li>
+                    <li>تمكين المنظمين المعتمدين من إرسال الفعاليات ومتابعة الإحصاءات المرتبطة بها.</li>
+                    <li>إرسال أو جدولة إشعارات وتذكيرات مرتبطة بالفعاليات عندما يختار المستخدم ذلك.</li>
+                    <li>تشغيل خصائص الأمان، ومراقبة الصلاحيات، وتحديث حالة المنظم عبر Firebase وCloud Functions.</li>
+                    <li>الالتزام بالمتطلبات القانونية، وحماية التطبيق، ومنع الاستخدام المسيء أو الاحتيالي.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">متى تكون المعلومات ظاهرة للآخرين أو مشتركة</div>
+            <div class="card">
+                <p>لا يبيع Waino بياناتك الشخصية. ومع ذلك، بعض البيانات تكون عامة أو يتم معالجتها بواسطة مزودي خدمة تقنيين حتى يعمل التطبيق كما هو متوقع.</p>
+                <ul>
+                    <li>الفعاليات المعتمدة قد تكون ظاهرة لمستخدمي التطبيق، بما في ذلك اسم الفعالية، وصورها، ووصفها، وموقعها، ومواعيدها، وبعض معلومات المنظم المرتبطة بها.</li>
+                    <li>الاسم الظاهر للمنظم وروابطه الاجتماعية في مجموعة publicOrganizersInfo قد تكون مرئية للمستخدمين داخل التطبيق.</li>
+                    <li>نستخدم Firebase وخدمات Google المرتبطة به للمصادقة، وقاعدة البيانات، والتخزين، والوظائف السحابية.</li>
+                    <li>نستخدم Expo Notifications لتشغيل خصائص الإشعارات على الأجهزة المدعومة.</li>
+                    <li>قد نكشف المعلومات إذا كان ذلك مطلوبًا قانونًا، أو لحماية المستخدمين، أو لتطبيق شروط الخدمة، أو للتحقيق في إساءة الاستخدام.</li>
+                    <li>قد يتمكن مسؤولو النظام أو المراجعة من الوصول إلى بيانات الفعاليات المعلقة، وصور الموافقات، وسجلات الصلاحيات لأغراض تشغيل المنصة.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">الإشعارات والبيانات المحلية على الجهاز</div>
+            <div class="card">
+                <p>إذا منحت إذن الإشعارات، فقد يطلب التطبيق صلاحية الإشعارات ويخزن معلومات مرتبطة بالإشعار على جهازك لتشغيل التذكيرات أو تجربة الإشعارات.</p>
+                <p>في البنية الحالية، تذكيرات الفعاليات التي يضبطها المستخدم يتم جدولتها محليًا على جهازه. كما يحتفظ التطبيق ببعض البيانات المحلية مثل الرموز المؤقتة، وحالة تسجيل الدخول، وبعض النسخ المخبأة لتسريع التجربة.</p>
+                <div class="note"><strong>ملاحظة:</strong> إذا كنت لا تريد الإشعارات، يمكنك رفض إذن النظام أو إيقافها من إعدادات جهازك. وإذا كنت لا تريد تذكير فعالية معين، يمكنك إيقافه من شاشة التذاكر.</div>
+            </div>
+
+            <div class="section-title">الاحتفاظ بالبيانات وحذفها</div>
+            <div class="card">
+                <p>نحتفظ بالبيانات طالما كان ذلك ضروريًا لتشغيل التطبيق، وتقديم التذاكر والفعاليات، وتنفيذ الالتزامات القانونية أو التشغيلية المشروعة.</p>
+                <p>قد تبقى بعض البيانات لفترة بعد حذفها من الواجهة إذا كانت جزءًا من سجلات احتياطية، أو سجلات أمان، أو سجلات تشغيلية مطلوبة بشكل معقول.</p>
+                <p>يمكن للمستخدم حذف حسابه من داخل التطبيق. وعند حذف الحساب، نحاول حذف سجل المستخدم المرتبط به من قاعدة البيانات، لكن بعض السجلات المرتبطة بالفعاليات أو السجلات المجمعة أو السجلات المطلوبة أمنيًا أو قانونيًا قد تبقى إذا كان الاحتفاظ بها ضروريًا.</p>
+            </div>
+
+            <div class="section-title">الأمان</div>
+            <div class="card">
+                <p>نتخذ خطوات معقولة لحماية البيانات باستخدام أدوات مزودينا التقنيين، والتحكم في الوصول، والاعتماد على Firebase Authentication وFirestore وCloud Functions وStorage. ومع ذلك، لا توجد وسيلة نقل أو تخزين إلكتروني مضمونة بنسبة 100%.</p>
+            </div>
+
+            <div class="section-title">خصوصية القُصّر</div>
+            <div class="card">
+                <p>Waino موجه أساسًا لطلاب الجامعات والمستخدمين القادرين قانونيًا على استخدام الخدمات الرقمية وفقًا للقانون المعمول به. إذا كنت غير مؤهل قانونيًا للموافقة على هذه الممارسات في بلدك، يجب استخدام التطبيق بإشراف أو موافقة من ولي أمرك حيثما يلزم.</p>
+            </div>
+
+            <div class="section-title">المعالجة الدولية</div>
+            <div class="card">
+                <p>قد تتم معالجة البيانات أو تخزينها عبر مزودي الخدمة الذين يعملون في أكثر من دولة. باستخدام التطبيق، فإنك تقر بأن معلوماتك قد تتم معالجتها خارج بلدك، بما يخضع لأدوات المزودين واتفاقياتهم.</p>
+            </div>
+
+            <div class="section-title">حقوقك وخياراتك</div>
+            <div class="card">
+                <ul>
+                    <li>يمكنك تحديث أجزاء من ملفك الشخصي من شاشة الملف الشخصي داخل التطبيق.</li>
+                    <li>يمكنك طلب حذف الحساب من داخل التطبيق.</li>
+                    <li>يمكنك التحكم في الإشعارات من إعدادات النظام على جهازك ومن إعدادات التذكير داخل التطبيق.</li>
+                    <li>يمكنك التوقف عن استخدام التطبيق في أي وقت، لكن بعض البيانات الضرورية لتشغيل السجلات أو الامتثال قد تستمر كما هو موضح أعلاه.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">التغييرات على هذه السياسة وكيفية التواصل معنا</div>
+            <div class="card">
+                <p>قد نقوم بتحديث سياسة الخصوصية هذه من وقت إلى آخر إذا تغير التطبيق أو طرق المعالجة أو الالتزامات القانونية. يصبح الإصدار المحدث ساريًا عند نشره داخل التطبيق أو عند ربطه به.</p>
+                <p>إذا كانت لديك أسئلة أو طلبات متعلقة بالخصوصية، فاستخدم قسم المساعدة والدعم داخل التطبيق كوسيلة التواصل الحالية مع Waino.</p>
+                <div class="note"><strong>ملاحظة:</strong> إذا أضفت بريدًا إلكترونيًا رسميًا للدعم أو كيانًا قانونيًا للنشر العام، فيجب إدراجه هنا أيضًا قبل النشر النهائي.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to handle switching functionality -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const langToggle = document.getElementById('langToggle');
+        const body = document.body;
+        const enContent = document.getElementById('en-content');
+        const arContent = document.getElementById('ar-content');
+
+        // State variables
+        let isDarkMode = true; // Default as requested
+        let isEnglish = true;
+
+        // Theme Toggle Logic
+        themeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            if (isDarkMode) {
+                body.classList.remove('light-mode');
+                themeToggle.textContent = '☀️ Light Mode';
+            } else {
+                body.classList.add('light-mode');
+                themeToggle.textContent = '🌙 Dark Mode';
+            }
+        });
+
+        // Language Toggle Logic
+        langToggle.addEventListener('click', () => {
+            isEnglish = !isEnglish;
+            if (isEnglish) {
+                enContent.style.display = 'block';
+                arContent.style.display = 'none';
+                langToggle.textContent = '🇸🇦 العربية';
+            } else {
+                enContent.style.display = 'none';
+                arContent.style.display = 'block';
+                langToggle.textContent = '🇺🇸 English';
+            }
+        });
+    </script>
 </body>
 </html>
